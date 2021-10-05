@@ -1,19 +1,19 @@
-import mongoose from 'mongoose'
+const { Schema, model } = require('mongoose')
 
-const WorkerModel = new mongoose.Schema({
-  // post :{type}
+const WorkerModel = new Schema({
+  post: { type: String },
   fio: { type: String, required: true },
-  surname: { type: String, required: true },
-  firstname: { type: String, required: true },
-  lastname: { type: String, required: true },
-  fio_doc: { type: String, required: true },
-  phone: { type: String, required: true },
-  inn: { type: String, required: true },
-  passport_series: { type: Number, required: true },
-  passport_number: { type: Number, required: true },
-  passport_date: { type: Date, required: true },
-  passpor_organ: { type: String, required: true },
-  addres: { type: String, required: true },
+  surname: { type: String },
+  firstname: { type: String },
+  lastname: { type: String },
+  fio_doc: { type: String },
+  phone: { type: String },
+  inn: { type: String },
+  passport_series: { type: Number },
+  passport_number: { type: Number },
+  passport_date: { type: Date },
+  passpor_organ: { type: String },
+  addres: { type: String },
 })
 
-export default mongoose.model('Worker', WorkerModel)
+module.exports = model('Worker', WorkerModel)

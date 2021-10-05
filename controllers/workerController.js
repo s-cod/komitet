@@ -1,9 +1,10 @@
-import Worker from '../models/workerModel.js'
+const Worker = require('../models/workerModel.js')
 
 class WorkerController {
   async create(req, res) {
     try {
       const {
+        post,
         fio,
         surname,
         firstname,
@@ -18,6 +19,7 @@ class WorkerController {
         addres,
       } = req.body
       const worker = await Worker.create({
+        post,
         fio,
         surname,
         firstname,
@@ -88,4 +90,4 @@ class WorkerController {
   }
 }
 
-export default new WorkerController()
+module.exports = new WorkerController()
