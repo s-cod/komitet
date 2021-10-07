@@ -1,3 +1,5 @@
+const UserDto = require('../dtos/userDto')
+const userModel = require('../models/userModel')
 const userService = require('../service/userService')
 
 class UserController {
@@ -6,7 +8,7 @@ class UserController {
       const { email, password } = req.body
       const userData = await userService.registration(email, password)
       res.cookie('refreshToken', userData.refreshToken, {
-        maxAge: 30 - 24 * 60 * 60 * 1000,
+        maxAge: 30 * 24 * 60 * 60 * 1000,
         httpOnly: true,
       })
       return res.json(userData)
@@ -32,7 +34,9 @@ class UserController {
   }
   async getUsers(req, res, next) {
     try {
-      res.json(['123', '453'])
+      const users = await userModel.find({})
+
+      res.json(users.map((u) => new UserDto(u)))
     } catch (e) {}
   }
 }
