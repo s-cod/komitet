@@ -17,7 +17,9 @@ class MailService {
       from: process.env.SMTP_USER,
       to: to,
       subject: 'Ссылка активации аккаунта',
-      text: `http://localhost:${process.env.PORT}/api/activate/${link}`,
+      html: `
+      <h1>Для активации перейдите по ссылке</h1>
+      <a href="http://localhost:${process.env.PORT}/api/activate/${link}">http://localhost:${process.env.PORT}/api/activate/${link}</a>`,
     })
   }
 }
