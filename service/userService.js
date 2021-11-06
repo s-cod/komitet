@@ -4,12 +4,15 @@ const uuid = require('uuid')
 const mailService = require('./mailService')
 const tokenService = require('./tokenService')
 const UserDto = require('../dtos/userDto')
+const ApiError = require('../exceptions/api-error')
 
 class UserService {
   async registration(email, password) {
     const candidate = await UserModel.findOne({ email })
     if (candidate) {
-      throw new Error(`Пользователь с почтовым адресом ${email} существует`)
+      throw ApiError.BadRequest(
+        `Пользователь с почтовым адресом ${email} существует`
+      )
     }
     const hashPassword = await bcrypt.hash(password, 3)
     const activationLink = uuid.v4()
@@ -33,10 +36,30 @@ class UserService {
     const user = await UserModel.findOne({ activationLink })
 
     if (!user) {
-      throw new Error('Некоректная ссылка активации')
+      throw ApiError.BadRequest('Некоректная ссылка активации')
     }
     user.isActivated = true
     user.save()
+  }
+  async login(email, password) {
+    const user = await UserModel.findOne({ email })
+    if (!user) {
+      throw ApiError.BadRequest('Пользователь с таким email не найден')
+    }
+    const isPassEquals = await bcrypt.compare(password, user.password)
+    if (!isPassEquals) {
+      throw ApiError.BadRequest(
+        'Пользователь с такими данными не зарегистрирован '
+      )
+    }
+    const userDto = new UserDto(user)
+    const tokens = tokenService.generateTokens({ ...userDto })
+    await tokenService.saveToken(userDto.id, tokens.refreshToken)
+
+    return {
+      ...tokens,
+      user: userDto,
+    }
   }
 }
 
