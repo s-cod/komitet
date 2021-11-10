@@ -1,0 +1,32 @@
+###
+GET http://localhost:5000/api/users
+Authorization: Bearer eyJhbGciOiJsIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNvZnJvbjgwQG1haWwucnUiLCJpZCI6IjYxODhlY2I3ZDlhZjFkYTA1YmRlYzc4MCIsImlzQWN0aXZhdGVkIjpmYWxzZSwiaWF0IjoxNjM2NDI3NDExLCJleHAiOjE2MzY0MjkyMTF9.wJUwT0QSNWY4nDi18WTorktD9Zg1r4yUJMsKd2aNAas
+###
+POST http://localhost:5000/api/registration
+Content-Type: application/json
+
+{
+  "email": "sofron80_2@mail.ru",
+  "password": "197319Sofron"
+}
+###
+POST http://localhost:5000/api/login
+Content-Type: application/json
+
+{
+  "email": "sofron80@mail.ru",
+  "password": "197319Sofron"
+}
+###
+POST http://localhost:5000/api/logout
+Set-Cookie:refreshToken=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNvZnJvbjgwQG1haWwucnUiLCJpZCI6IjYxODhlY2I3ZDlhZjFkYTA1YmRlYzc4MCIsImlzQWN0aXZhdGVkIjpmYWxzZSwiaWF0IjoxNjM2MzYzODQ3LCJleHAiOjE2Mzg5NTU4NDd9.JirgmFdaPK7xfbLAuJ3otOwyfuvB8ullHJGY3mmCnXM; Max-Age=2592000; Path=/; Expires=Wed, 08 Dec 2021 09:30:47 GMT; HttpOnly
+###
+
+GET http://localhost:5000/api/activate/f156896e-8683-40b3-8401-0fa4d6e61e24
+
+
+###
+
+{
+  "refreshToken" :"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNyZGRkc29kc244MEBtYWlsLnJ1IiwiaWQiOiI2MTVlY2Y4YzFmMDg2MTM1MGFjYzlmNzQiLCJpc0FjdGl2YXRlZCI6ZmFsc2UsImlhdCI6MTYzMzYwMzQ3MCwiZXhwIjoxNjM2MTk1NDcwfQ.xuaqf8ToOD9MqtCf5QOFEV6kprk9TXqujtpSa7ZTZrU"
+}
